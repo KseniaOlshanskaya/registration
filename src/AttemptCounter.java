@@ -4,19 +4,16 @@ public class AttemptCounter {
 
     public static synchronized AttemptCounter getInstance() throws TooManyLoginAttemptsException {
         if(instance == null) {
-            counter = 1;
             instance = new AttemptCounter();
         }
-        else {
-            counter++;
-        }
-        instance.getCount();
         return instance;
     }
 
     public void getCount() throws TooManyLoginAttemptsException {
-        if(counter >= 5) {
+        if(counter == 5) {
+            counter = 0;
             throw new TooManyLoginAttemptsException("Слишком много попыток ввода. ");
         }
+        counter++;
     }
 }
