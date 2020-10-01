@@ -91,7 +91,8 @@ public class AccountManagerImpl implements MailAccountManager {
     }
 
     @Override
-    public Person getPerson(String email, String password) throws TooManyLoginAttemptsException {
+    public Person getPerson(String email, String password) throws WrongMethodTypeException,
+            TooManyLoginAttemptsException {
         try (FileReader fr = new FileReader(this.file)) {
             Scanner scan = new Scanner(fr);
             while (scan.hasNextLine()) {
@@ -101,12 +102,12 @@ public class AccountManagerImpl implements MailAccountManager {
                 }
                 else {
                     AttemptCounter.getInstance();
-                    if (AttemptCounter.counter == 5) {
-                        throw new TooManyLoginAttemptsException("Слишком много попыток входа");
                     }
                 }
+            throw new WrongCredentialsException("Аккаунта с таким логином или " +
+                    "паролем не существует.");
             }
-        } catch (IOException exc) {
+        catch (IOException | WrongCredentialsException exc) {
             exc.printStackTrace(System.out);
         }
         return null;
