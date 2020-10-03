@@ -6,4 +6,11 @@ public class Person {
         this.personInitials = initials;
         this.birthdayDate = date;
     }
+    public String getInitials() {
+        return this.personInitials;
+    }
+
+    public String getBirthdayDate() {
+        return this.birthdayDate;
+    }
 }

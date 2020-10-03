@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /** Интерфейс управления аккаунтами, для базы используется
  * текстовый файл в формате CSV */
 public interface MailAccountManager {
@@ -13,7 +16,7 @@ public interface MailAccountManager {
      * верно. В противном случае выбрасывает
      * ошибку WrongCredentialsException
      */
-    void removeAccount(String email, String password);
+    void removeAccount(String email, String password) throws WrongCredentialsException;
     /** Метод возвращает true если пользователь с данным логином
      * существует
      */
